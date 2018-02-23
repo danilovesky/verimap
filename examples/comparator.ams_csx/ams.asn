@@ -1,0 +1,137 @@
+// Default drive
+DRIVE=1
+
+// Flip-flop port names
+FF_C=C
+FF_D=D
+FF_SN=SN
+FF_RN=RN
+FF_SE=SE
+FF_SD=SD
+FF_E=E
+FF_EN=EN
+FF_Q=Q
+FF_QN=QN
+FF_SP=SP
+
+// Buffer for clock tree, port names and maximum load
+BUF=BU4
+BUF_IN=A
+BUF_OUT=Q
+BUF_MAX_LOAD=16
+
+// Inverter prefix and port names
+INV=IN1
+INV_IN=A
+INV_OUT=Q
+
+// Spacer polarity inverter prefix and port names
+SPINV=spinv
+SPINV_IN=i
+SPINV_OUT=z
+
+// Empty module prefix and port names
+EMPTY=empty
+EMPTY_IN=i
+EMPTY_OUT=z
+
+// OR2-gate prefix and port names
+OR2=OR2
+OR2_IN1=A
+OR2_IN2=B
+OR2_OUT=Q
+
+// OR3-gate prefix and port names
+OR3=OR3
+OR3_IN1=A
+OR3_IN2=B
+OR3_IN3=C
+OR3_OUT=Q
+
+// NOR2-gate prefix and port names
+NOR2=NO2
+NOR2_IN1=A
+NOR2_IN2=B
+NOR2_OUT=Q
+
+// NOR3-gate prefix and port names
+NOR3=NO3
+NOR3_IN1=A
+NOR3_IN2=B
+NOR3_IN3=C
+NOR3_OUT=Q
+
+// AND2-gate prefix and port names
+AND2=AND2
+AND2_IN1=A
+AND2_IN2=B
+AND2_OUT=Q
+
+// AND3-gate prefix and port names
+AND3=AND3
+AND3_IN1=A
+AND3_IN2=B
+AND3_IN3=C
+AND3_OUT=Q
+
+// NAND2-gate prefix and port names
+NAND2=NA2
+NAND2_IN1=A
+NAND2_IN2=B
+NAND2_OUT=Q
+
+// NAND3-gate prefix and port names
+NAND3=NA3
+NAND3_IN1=A
+NAND3_IN2=B
+NAND3_IN3=C
+NAND3_OUT=Q
+
+// XOR-gate prefix and port names
+XOR2=XR2
+XOR2_IN1=A
+XOR2_IN2=B
+XOR2_OUT=Q
+
+// XNOR-gate prefix and port names
+XNOR2=XN2
+XNOR2_IN1=A
+XNOR2_IN2=B
+XNOR2_OUT=Q
+
+// Inverter prefix and port names
+Cx=c0%dd1
+Cx_INx=i%d
+Cx_OUT=z
+
+//  Single-to-alternating spacer module name and port names
+SR2DR=SR2DR
+SR2DR_C=C
+SR2DR_IN=A
+SR2DR_OUT=Q
+SR2DR_SP=SP
+
+// Alternating-to-single spacer module name and port names
+DR2SR=DR2SR
+DR2SR_C=C
+DR2SR_IN=A
+DR2SR_OUT=Q
+DR2SR_SP=SP
+
+// Toggle name and port names
+SPCTRL=spctrl
+SPCTRL_C=C
+SPCTRL_RN=RN
+SPCTRL_OUT=Q
+
+// Go-controller name and its port names
+GOCTRL=goctrl
+GOCTRL_C=C
+GOCTRL_DN=DN
+GOCTRL_SN=SN
+GOCTRL_OUT=GO
+
+// Completion detection port names
+SPACER=spacer
+GO=go
+DONE=done

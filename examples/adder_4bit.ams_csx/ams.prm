@@ -1,0 +1,350 @@
+// The list of module parameters
+
+[
+gate_delay,           // gate delay in "simple negative gate" number
+negative_gate_number, // number of negative gates
+invertor_number,      // number of invertors
+flip_flop_number,     // number of flip-flops
+transistor_number,    // number of transistors
+area                  // area of the module in square microns
+]
+
+/*
+Table of module parameters
+
+module        module                module
+name          parameters            description
+*/
+
+AN21          1,1,0,0,6,91          // 2-Input AND into 2-Input NOR
+AN22          1,1,0,0,8,109         // 2x2-Input AND into 2-Input NOR
+AN31          1,1,0,0,8,109         // 3-Input AND into 2-Input NOR
+AN32          1,1,0,0,10,127        // 3-Input AND, 2-Input AND into 2-Input NOR
+AN33          1,1,0,0,12,146        // 2x3-Input AND into 2-Input NOR
+AN211         1,1,0,0,8,127         // 2-Input AND into 3-Input NOR
+AN221         1,1,0,0,10,146        // 2x2-Input AND into 3-Input NOR
+AN222         1,1,0,0,12,164        // 3x2-Input AND into 3-Input NOR
+AN311         1,1,0,0,10,146        // 3-Input AND into 3-Input NOR
+AN321         1,1,0,0,12,200        // 3-Input AND, 2-Input AND into 3-Input NOR
+AN322         1,1,0,0,14,219        // 3-Input AND, 2x2-Input AND into 3-Input NOR // !!! bigger than AO322
+AN331         1,1,0,0,14,200        // 2x3-Input AND into 3-Input NOR 
+AN332         1,1,0,0,16,219        // 2x3-Input AND, 2-Input AND into 3-Input NOR // !!! bigger than AO332
+AN333         1,1,0,0,18,273        // 3x3-Input AND into 3-Input NOR // !!! bigger than AO333
+
+AND2          2,2,1,0,6,73          // 2-Input AND (1234x)
+AND22         2,2,1,0,6,73          // 2-Input AND (1234x)
+AND23         2,2,1,0,6,91          // 2-Input AND (1234x)
+AND24         2,2,1,0,6,91          // 2-Input AND (1234x) // !!! smaller than NA24
+AND3          2,2,1,0,8,91          // 3-Input AND (1234x)
+AND32         2,2,1,0,8,91          // 3-Input AND (1234x) // !!! smaller than NA32
+AND33         2,2,1,0,8,109         // 3-Input AND (1234x)
+AND34         2,2,1,0,8,109         // 3-Input AND (1234x)
+AND4          2,3,0,0,12,146        // 4-Input AND (1234x) // !!! smaller than NA4
+AND42         4,5,2,0,16,182        // 4-Input AND (1234x)
+AND43         4,5,2,0,16,200        // 4-Input AND (1234x)
+AND44         4,5,2,0,16,200        // 4-Input AND (1234x)
+AND5          2,3,0,0,14,164        // 5-Input AND (1234x) // !!! smaller than NA5
+AND52         4,5,2,0,18,200        // 5-Input AND (1234x)
+AND53         4,5,2,0,18,219        // 5-Input AND (1234x)
+AND54         4,5,2,0,18,219        // 5-Input AND (1234x)
+AND6          3,3,0,0,16,182        // 6-Input AND (1234x) // !!! smaller than NA6
+AND62         4,5,2,0,20,237        // 6-Input AND (1234x)
+AND63         4,5,2,0,20,255        // 6-Input AND (1234x)
+AND64         4,5,2,0,20,255        // 6-Input AND (1234x)
+AND7          2,4,0,0,20,219        // 7-Input AND (1234x) // !!! smaller than NA7
+AND72         4,6,2,0,24,273        // 7-Input AND (1234x)
+AND73         4,6,2,0,24,291        // 7-Input AND (1234x)
+AND74         4,6,2,0,24,291        // 7-Input AND (1234x)
+AND8          2,4,0,0,22,237        // 8-Input AND (1234x) // !!! smaller than NA8
+AND82         4,6,2,0,26,291        // 8-Input AND (1234x)
+AND83         4,6,2,0,26,310        // 8-Input AND (1234x)
+AND84         4,6,2,0,26,310        // 8-Input AND (1234x)
+
+AO21          2,2,1,0,6,109         // 2-Input AND into 2-Input OR
+AO22          2,2,1,0,8,109         // 2x2-Input AND into 2-Input OR
+AO31          2,2,1,0,8,127         // 3-Input AND into 2-Input OR
+AO32          2,2,1,0,10,146        // 3-Input AND, 2-Input AND into 2-Input OR
+AO33          2,2,1,0,12,164        // 2x3-Input AND into 2-Input OR
+AO211         2,2,1,0,8,146         // 2-Input AND into 3-Input OR
+AO221         2,2,1,0,10,164        // 2x2-Input AND into 3-Input OR
+AO222         2,2,1,0,12,182        // 3x2-Input AND into 3-Input OR
+AO311         2,2,1,0,10,164        // 3-Input AND into 3-Input OR
+AO321         2,2,1,0,12,219        // 3-Input AND, 2-Input AND into 3-Input OR
+AO322         2,2,1,0,14,200        // 3-Input AND, 2x2-Input AND into 3-Input OR // !!! smaller than AN322
+AO331         2,2,1,0,14,219        // 2x3-Input AND into 3-Input OR
+AO332         2,2,1,0,16,200        // 2x3-Input AND, 2-Input AND into 3-Input OR // !!! smaller than AN332
+AO333         2,2,1,0,18,219        // 3x3-Input AND into 3-Input OR // !!! smaller than AN333
+
+BT1           2,-,-,0,10,146        // Tri-State Buffer with active high enable (12348x)
+BT12          2,-,-,0,10,146        // Tri-State Buffer with active high enable (12348x)
+BT13          2,-,-,0,10,164        // Tri-State Buffer with active high enable (12348x)
+BT14          2,-,-,0,10,164        // Tri-State Buffer with active high enable (12348x)
+BT18          2,-,-,0,10,200        // Tri-State Buffer with active high enable (12348x)
+BT2           2,-,-,0,10,146        // Tri-State Buffer with active low enable (12348x)
+BT22          2,-,-,0,10,146        // Tri-State Buffer with active low enable (12348x)
+BT23          2,-,-,0,10,164        // Tri-State Buffer with active low enable (12348x)
+BT24          2,-,-,0,10,164        // Tri-State Buffer with active low enable (12348x)
+BT28          2,-,-,0,10,200        // Tri-State Buffer with active low enable (12348x)
+
+BU1           2,2,2,0,4,73          // Noninverting Buffer (12348x)
+BU2           2,2,2,0,4,73          // Noninverting Buffer (12348x)
+BU3           2,2,2,0,4,91          // Noninverting Buffer (12348x)
+BU4           2,2,2,0,4,91          // Noninverting Buffer (12348x)
+BU8           2,2,2,0,4,127         // Noninverting Buffer (12348x)
+
+DF8           0,-,-,1,-,237         // D-Type Flip-Flop (124x)
+DF82          0,-,-,1,-,291         // D-Type Flip-Flop (124x)
+DF84          0,-,-,1,-,310         // D-Type Flip-Flop (124x)
+DF9           0,-,-,1,-,310         // D-Type Flip-Flop with Set (124x)
+DF92          0,-,-,1,-,310         // D-Type Flip-Flop with Set (124x)
+DF94          0,-,-,1,-,346         // D-Type Flip-Flop with Set (124x)
+DFA           0,-,-,1,-,346         // D-Type Flip-Flop with Reset (124x)
+DFA2          0,-,-,1,-,346         // D-Type Flip-Flop with Reset (124x)
+DFA4          0,-,-,1,-,364         // D-Type Flip-Flop with Reset (124x)
+DFB           0,-,-,1,-,382         // D-Type Flip-Flop with Set and Reset (124x)
+DFB2          0,-,-,1,-,382         // D-Type Flip-Flop with Set and Reset (124x)
+DFB4          0,-,-,1,-,419         // D-Type Flip-Flop with Set and Reset (124x)
+DFS8          0,-,-,1,-,382         // Scan D-Flip-Flop (124x)
+DFS82         0,-,-,1,-,401         // Scan D-Flip-Flop (124x)
+DFS84         0,-,-,1,-,419         // Scan D-Flip-Flop (124x)
+DFS9          0,-,-,1,-,437         // Scan D-Flip-Flop with Set (124x)
+DFS92         0,-,-,1,-,437         // Scan D-Flip-Flop with Set (124x)
+DFS94         0,-,-,1,-,473         // Scan D-Flip-Flop with Set (124x)
+DFSA          0,-,-,1,-,419         // Scan D-Flip-Flop with Reset (124x)
+DFSA2         0,-,-,1,-,419         // Scan D-Flip-Flop with Reset (124x)
+DFSA4         0,-,-,1,-,455         // Scan D-Flip-Flop with Reset (124x)
+DFSB          0,-,-,1,-,492         // Scan D-Flip-Flop with Set and Reset (124x)
+DFSB2         0,-,-,1,-,492         // Scan D-Flip-Flop with Set and Reset (124x)
+DFSB4         0,-,-,1,-,528         // Scan D-Flip-Flop with Set and Reset (124x)
+
+DL8           0,-,-,1,-,200         // Data Latch (124x)
+DL82          0,-,-,1,-,200         // Data Latch (124x)
+DL84          0,-,-,1,-,237         // Data Latch (124x)
+DL8Z          0,-,-,1,-,219         // Data Latch with Tristate Output (124x)
+DL8Z2         0,-,-,1,-,255         // Data Latch with Tristate Output (124x)
+DL8Z4         0,-,-,1,-,328         // Data Latch with Tristate Output (124x)
+DL9           0,-,-,1,-,237         // Data Latch with Set (124x)
+DL92          0,-,-,1,-,237         // Data Latch with Set (124x)
+DL94          0,-,-,1,-,273         // Data Latch with Set (124x)
+DLA           0,-,-,1,-,273         // Data Latch with Reset (124x)
+DLA2          0,-,-,1,-,291         // Data Latch with Reset (124x)
+DLA4          0,-,-,1,-,310         // Data Latch with Reset (124x)
+DLB           0,-,-,1,-,273         // Data Latch with Set and Reset (124x)
+DLB2          0,-,-,1,-,273         // Data Latch with Set and Reset (124x)
+DLB4          0,-,-,1,-,310         // Data Latch with Set and Reset (124x)
+
+empty         0,0,0,0,0,0           // Empty module connecting input to output
+
+EN1           2,2,0,0,10,109        // 2-Input XNOR (1234x)
+EN12          4,4,2,0,14,164        // 2-Input XNOR (1234x)
+EN13          4,4,2,0,14,182        // 2-Input XNOR (1234x)
+EN14          4,4,2,0,14,182        // 2-Input XNOR (1234x)
+EN3           4,4,0,0,20,237        // 3-Input XNOR (1234x)
+EN32          6,6,2,0,24,291        // 3-Input XNOR (1234x)
+EN33          6,6,2,0,24,310        // 3-Input XNOR (1234x)
+EN34          6,6,2,0,24,310        // 3-Input XNOR (1234x)
+
+EO1           2,2,0,0,10,146        // 2-Input XOR (1234x)
+EO12          4,4,2,0,14,200        // 2-Input XOR (1234x)
+EO13          4,4,2,0,14,200        // 2-Input XOR (1234x)
+EO14          4,4,2,0,14,219        // 2-Input XOR (1234x)
+EO3           4,4,0,0,20,273        // 3-Input XOR (1234x)
+EO32          6,6,2,0,24,328        // 3-Input XOR (1234x)
+EO33          6,6,2,0,24,328        // 3-Input XOR (1234x)
+EO34          6,6,2,0,24,346        // 3-Input XOR (1234x)
+
+FA1           4,-,-,0,28,364        // Full-Adder (1234x) // ??? Why FA1 is bigger then FA12?
+FA12          4,-,-,0,28,346        // Full-Adder (1234x)
+FA13          4,-,-,0,28,382        // Full-Adder (1234x)
+FA14          4,-,-,0,28,382        // Full-Adder (1234x)
+HA1           3,-,-,0,14,164        // Half-Adder (1234x)
+HA12          3,-,-,0,14,164        // Half-Adder (1234x)
+HA13          3,-,-,0,14,200        // Half-Adder (1234x)
+HA14          3,-,-,0,14,200        // Half-Adder (1234x)
+
+// ??? Why so complecated? Why so different?
+IMU2          2,3,1,0,10,109        // 2:1 Inverting Multiplexer (124x)
+IMU22         2,5,1,0,18,182        // 2:1 Inverting Multiplexer (124x) // !!! bigger than MU22
+IMU24         4,5,3,0,14,200        // 2:1 Inverting Multiplexer (124x) // !!! bigger than MU24
+IMU4          4,9,3,0,30,310        // 4:1 Inverting Multiplexer (124x) // !!! bigger than MU4
+IMU42         4,9,3,0,30,310        // 4:1 Inverting Multiplexer (124x)
+IMU44         4,9,3,0,30,328        // 4:1 Inverting Multiplexer (124x)
+IMU8          6,18,4,0,80,637       // 8:1 Inverting Multiplexer (124x) // !!! bigger than MU8
+IMU82         6,18,4,0,80,655       // 8:1 Inverting Multiplexer (124x) // !!! bigger than MU82
+IMU84         6,18,4,0,80,674       // 8:1 Inverting Multiplexer (124x) // !!! bigger than MU84
+
+IN1           1,1,1,0,2,36          // Inverter (12348x)
+IN2           1,1,1,0,2,55          // Inverter (12348x)
+IN3           1,1,1,0,2,55          // Inverter (12348x)
+IN4           1,1,1,0,2,73          // Inverter (12348x)
+IN8           1,1,1,0,2,109         // Inverter (12348x)
+
+// ??? Why INA2x is not symmetrical to INO2x ?
+INA2          2,2,1,0,6,91          // 2-Input NAND with one inverted input (1234x)
+INA22         2,2,1,0,6,91          // 2-Input NAND with one inverted input (1234x)
+INA23         2,2,1,0,6,127         // 2-Input NAND with one inverted input (1234x)
+INA24         2,2,1,0,6,146         // 2-Input NAND with one inverted input (1234x)
+
+INO2          2,2,1,0,6,73          // 2-Input NOR with one inverted input (1234x)
+INO22         2,4,2,0,10,109        // 2-Input NOR with one inverted input (1234x)
+INO23         4,4,2,0,10,164        // 2-Input NOR with one inverted input (1234x)
+INO24         4,4,2,0,10,164        // 2-Input NOR with one inverted input (1234x)
+
+IT1           2,-,-,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT12          2,-,-,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT13          2,-,-,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT14          2,-,-,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT1LP         2,-,-,0,12,73          // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT2           2,-,-,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT22          2,-,-,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT23          2,-,-,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT24          2,-,-,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT2LP         2,-,-,0,12,73          // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+
+JK9           0,-,-,1,-,437         // JK Flip-Flop with Set (124x)
+JK92          0,-,-,1,-,437         // JK Flip-Flop with Set (124x)
+JK94          0,-,-,1,-,473         // JK Flip-Flop with Set (124x)
+JKA           0,-,-,1,-,473         // JK Flip-Flop with Reset (124x)
+JKA2          0,-,-,1,-,473         // JK Flip-Flop with Reset (124x)
+JKA4          0,-,-,1,-,510         // JK Flip-Flop with Reset (124x)
+JKS9          0,-,-,1,-,583         // Scan JK Flip-Flop with Set (124x)
+JKS92         0,-,-,1,-,583         // Scan JK Flip-Flop with Set (124x)
+JKS94         0,-,-,1,-,619         // Scan JK Flip-Flop with Set (124x)
+JKSA          0,-,-,1,-,619         // JK Flip-Flop with Reset (124x)
+JKSA2         0,-,-,1,-,619         // JK Flip-Flop with Reset (124x)
+JKSA4         0,-,-,1,-,655         // JK Flip-Flop with Reset (124x)
+
+LOGIC0        1,0,0,0,0,36          // Tie-Down to Logic Low-Level  // ???
+LOGIC1        1,0,0,0,0,36          // Tie-Up to Logic High-Level // ???
+
+MU2           3,4,2,0,12,127        // 2:1 Multiplexer (124x)
+MU22          3,4,2,0,12,127        // 2:1 Multiplexer (124x) // !!! smaller than IMU22
+MU24          3,4,2,0,12,146        // 2:1 Multiplexer (124x) // !!! smaller than IMU24
+MU4           3,8,2,0,28,273        // 4:1 Multiplexer (124x) // !!! smaller than IMU4
+MU42          5,10,4,0,32,328       // 4:1 Multiplexer (124x)
+MU44          5,10,4,0,32,346       // 4:1 Multiplexer (124x)
+MU8           5,17,3,0,78,619       // 8:1 Multiplexer (124x) // !!! smaller than IMU8 
+MU82          5,17,3,0,78,619       // 8:1 Multiplexer (124x) // !!! smaller than IMU82
+MU84          5,17,3,0,78,655       // 8:1 Multiplexer (124x) // !!! smaller than IMU84
+
+// ??? Why NA2x and NA3x are not symmetrical to NO2x and NO3x respectivly?
+NA2           1,1,0,0,4,55          // 2-Input NAND (1234x)
+NA22          1,1,0,0,4,73          // 2-Input NAND (1234x)
+NA23          1,1,0,0,4,91          // 2-Input NAND (1234x)
+NA24          1,1,0,0,4,127         // 2-Input NAND (1234x) // !!! bigger than AND24
+NA3           1,1,0,0,6,91          // 3-Input NAND (1234x)
+NA32          1,1,0,0,6,109         // 3-Input NAND (1234x) // !!! bigger than AND32
+NA33          1,3,2,0,10,146        // 3-Input NAND (1234x)
+NA34          3,3,2,0,10,146        // 3-Input NAND (1234x)
+NA4           3,4,1,0,14,164        // 4-Input NAND (1234x) // !!! bigger than AND4
+NA42          3,4,1,0,14,182        // 4-Input NAND (1234x)
+NA43          3,4,1,0,14,182        // 4-Input NAND (1234x)
+NA44          3,4,1,0,14,200        // 4-Input NAND (1234x)
+NA5           3,4,1,0,16,182        // 5-Input NAND (1234x) // !!! bigger than AND5
+NA52          3,4,1,0,16,200        // 5-Input NAND (1234x)
+NA53          3,4,1,0,16,200        // 5-Input NAND (1234x)
+NA54          3,4,1,0,16,200        // 5-Input NAND (1234x)
+NA6           3,4,1,0,18,200        // 6-Input NAND (1234x) // !!! bigger than AND6 // ??? not symmetric to NO6x
+NA62          3,4,1,0,18,200        // 6-Input NAND (1234x)
+NA63          3,4,1,0,18,219        // 6-Input NAND (1234x)
+NA64          3,4,1,0,18,219        // 6-Input NAND (1234x)
+NA7           3,5,1,0,22,237        // 7-Input NAND (1234x) // !!! bigger than AND7
+NA72          3,5,1,0,22,237        // 7-Input NAND (1234x)
+NA73          3,5,1,0,22,255        // 7-Input NAND (1234x)
+NA74          3,5,1,0,22,255        // 7-Input NAND (1234x)
+NA8           3,5,1,0,24,255        // 8-Input NAND (1234x) // !!! bigger than AND8
+NA82          3,5,1,0,24,255        // 8-Input NAND (1234x)
+NA83          3,5,1,0,24,273        // 8-Input NAND (1234x)
+NA84          3,5,1,0,24,273        // 8-Input NAND (1234x)
+
+NO2           1,1,0,0,4,55          // 2-Input NOR (1234x)
+NO22          1,2,0,0,8,91          // 2-Input NOR (1234x) // !!! bigger than OR22 // ??? Strange implementation
+NO23          3,3,2,0,8,146         // 2-Input NOR (1234x) // !!! bigger than OR23
+NO24          3,3,2,0,8,146         // 2-Input NOR (1234x) // !!! bigger than OR24
+NO3           1,1,0,0,6,91          // 3-Input NOR (1234x)
+NO32          1,1,0,0,6,146         // 3-Input NOR (1234x) // !!! bigger than OR32
+NO33          3,3,2,0,10,164        // 3-Input NOR (1234x) // !!! bigger than OR33
+NO34          3,3,2,0,10,164        // 3-Input NOR (1234x) // !!! bigger than OR34
+NO4           3,4,1,0,14,164        // 4-Input NOR (1234x) // !!! bigger than OR4
+NO42          3,4,1,0,14,164        // 4-Input NOR (1234x) // !!! bigger than OR42
+NO43          3,4,1,0,14,182        // 4-Input NOR (1234x)
+NO44          3,4,1,0,14,182        // 4-Input NOR (1234x)
+NO5           3,4,1,0,14,200        // 5-Input NOR (1234x)
+NO52          3,4,1,0,16,200        // 5-Input NOR (1234x)
+NO53          3,4,1,0,16,219        // 5-Input NOR (1234x) // !!! bigger than OR53
+NO54          3,4,1,0,16,219        // 5-Input NOR (1234x)
+NO6           3,5,1,0,20,237        // 6-Input NOR (1234x) // !!! bigger than OR6 // ??? not symmetrical to NA6x
+NO62          3,5,1,0,20,237        // 6-Input NOR (1234x)
+NO63          3,5,1,0,20,255        // 6-Input NOR (1234x)
+NO64          3,5,1,0,20,255        // 6-Input NOR (1234x)
+NO7           3,5,1,0,22,255        // 7-Input NOR (1234x) // !!! bigger than OR7
+NO72          3,5,1,0,22,255        // 7-Input NOR (1234x)
+NO73          3,5,1,0,22,273        // 7-Input NOR (1234x)
+NO74          3,5,1,0,22,273        // 7-Input NOR (1234x)
+NO8           3,5,1,0,24,291        // 8-Input NOR (1234x)
+NO82          3,5,1,0,24,291        // 8-Input NOR (1234x)
+NO83          3,5,1,0,24,291        // 8-Input NOR (1234x)
+NO84          3,5,1,0,24,310        // 8-Input NOR (1234x)
+
+OA21          2,2,1,0,8,109         // 2-Input OR into 2-Input AND
+OA22          2,2,1,0,10,109        // 2x2-Input OR into 2-Input AND
+OA31          2,2,1,0,10,109        // 3-Input OR into 2-Input AND
+OA32          2,2,1,0,12,127        // 3-Input OR, 2-Input OR into 2-Input AND
+OA33          2,2,1,0,14,146        // 2x3-Input OR into 2-Input AND
+OA211         2,2,1,0,10,127        // 2-Input OR into 3-Input AND
+OA221         2,2,1,0,12,146        // 2x2-Input OR into 3-Input AND
+OA222         2,2,1,0,14,164        // 3x2-Input OR into 3-Input AND
+OA311         2,2,1,0,12,146        // 3-Input OR into 3-Input AND
+OA321         2,2,1,0,14,164        // 3-Input OR, 2-Input OR into 3-Input AND
+OA322         2,2,1,0,16,182        // 3-Input OR, 2x2-Input OR into 3-Input AND
+OA331         2,2,1,0,16,182        // 2x3-Input OR into 3-Input AND
+OA332         2,2,1,0,18,200        // 2x3-Input OR, 2-Input OR into 3-Input AND
+OA333         2,2,1,0,20,219        // 3x3-Input OR into 3-Input AND
+
+ON21          1,1,0,0,6,91          // 2-Input OR into 2-Input NAND
+ON22          1,1,0,0,8,109         // 2x2-Input OR into 2-Input NAND
+ON31          1,1,0,0,8,109         // 3-Input OR into 2-Input NAND
+ON32          1,1,0,0,10,127        // 3-Input OR, 2-Input OR into 2-Input NAND
+ON33          1,1,0,0,12,146        // 2x3-Input OR into 2-Input NAND
+ON211         1,1,0,0,8,109         // 2-Input OR into 3-Input NAND
+ON221         1,1,0,0,10,127        // 2x2-Input OR into 3-Input NAND
+ON222         1,1,0,0,12,146        // 3x2-Input OR into 3-Input NAND
+ON311         1,1,0,0,10,127        // 3-Input OR into 3-Input NAND
+ON321         1,1,0,0,12,164        // 3-Input OR, 2-Input OR into 3-Input NAND
+ON322         1,1,0,0,14,182        // 3-Input OR, 2x2-Input OR into 3-Input NAND
+ON331         1,1,0,0,14,182        // 2x3-Input OR into 3-Input NAND
+ON332         1,1,0,0,16,182        // 2x3-Input OR, 2-Input OR into 3-Input NAND
+ON333         1,1,0,0,18,219        // 3x3-Input OR into 3-Input NAND
+
+OR2           2,2,1,0,6,73          // 2-Input OR (1234x)
+OR22          2,2,1,0,6,73          // 2-Input OR (1234x) // !!! smaller than NO22
+OR23          2,2,1,0,6,109         // 2-Input OR (1234x) // !!! smaller than NO23
+OR24          2,2,1,0,6,109         // 2-Input OR (1234x) // !!! smaller than NO24
+OR3           2,2,1,0,8,109         // 3-Input OR (1234x)
+OR32          2,2,1,0,8,109         // 3-Input OR (1234x) // !!! smaller than NO32
+OR33          2,2,1,0,8,127         // 3-Input OR (1234x) // !!! smaller than NO33
+OR34          2,2,1,0,8,127         // 3-Input OR (1234x) // !!! smaller than NO34
+OR4           2,3,0,0,12,146        // 4-Input OR (1234x) // !!! smaller than NO4
+OR42          2,3,0,0,12,146        // 4-Input OR (1234x) // !!! smaller than NO42
+OR43          2,3,0,0,12,182        // 4-Input OR (1234x)
+OR44          2,3,0,0,12,200        // 4-Input OR (1234x)
+OR5           2,3,0,0,14,182        // 5-Input OR (1234x) // ??? why OR5 is bigger than OR52?
+OR52          2,3,0,0,14,164        // 5-Input OR (1234x)
+OR53          2,3,0,0,14,200        // 5-Input OR (1234x) // !!! smaller than NO53
+OR54          2,3,0,0,14,219        // 5-Input OR (1234x)
+OR6           2,4,0,0,18,200        // 6-Input OR (1234x) // !!! smaller than NO6
+OR62          2,4,0,0,18,237        // 6-Input OR (1234x)
+OR63          4,6,2,0,22,273        // 6-Input OR (1234x) // ??? again interestin asymmetry
+OR64          4,6,2,0,22,291        // 6-Input OR (1234x)
+OR7           2,4,0,0,20,237        // 7-Input OR (1234x) // !!! smaller than NO7
+OR72          2,4,0,0,20,255        // 7-Input OR (1234x)
+OR73          4,6,2,0,24,291        // 7-Input OR (1234x)
+OR74          4,6,2,0,24,310        // 7-Input OR (1234x)
+OR8           2,4,0,0,22,273        // 8-Input OR (1234x)
+OR82          2,4,0,0,22,291        // 8-Input OR (1234x)
+OR83          4,6,2,0,26,328        // 8-Input OR (1234x)
+OR84          4,6,2,0,26,346        // 8-Input OR (1234x)
+
+SIGNALHOLD    1,2,2,0,4,127         // Bus Holder
+
+spinv         1,0,0,0,0,0           // Spacer Inverter (12348x)

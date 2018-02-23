@@ -1,9 +1,5 @@
 /.settings
-/benchmarks
-/components
-/distr
-/lib
-/test
+/private-*
 /.cdtproject
 /.cproject
 /.project

@@ -1,0 +1,161 @@
+/*
+Rules for Combinational Logic transformation into Positive Dual-Rail logic (not inverting spacer) or Negative Dual-Rail logic (inverting spacer)
+SR             DR             positive       positivr       negative       negative       input-output
+logic          logic          direct         complement     direct         complement     polarity and   flags 
+prefix         prefix         prefix         prefix         prefix         prefix         rail number    FF CD P|0 N|1  description
++[DRV]         +[DRV]_[p|n]dr +[DRV]        +[DRV]          +[DRV]         +[DRV]         [pnsdcPNSDC]   [y|n]
+*/
+
+AN21           AN21           AO21           OA21           AN21           ON21           pppN           nyyy           // 2-Input AND into 2-Input NOR
+AN22           AN22           AO22           OA22           AN22           ON22           ppppN          nyyy           // 2x2-Input AND into 2-Input NOR
+AN31           AN31           AO31           OA31           AN31           ON31           ppppN          nyyy           // 3-Input AND into 2-Input NOR
+AN32           AN32           AO32           OA32           AN32           ON32           pppppN         nyyy           // 3-Input AND, 2-Input AND into 2-Input NOR
+AN33           AN33           AO33           OA33           AN33           ON33           ppppppN        nyyy           // 2x3-Input AND into 2-Input NOR
+AN211          AN211          AO211          OA211          AN211          ON211          ppppN          nyyy           // 2-Input AND into 3-Input NOR
+AN221          AN221          AO221          OA221          AN221          ON221          pppppN         nyyy           // 2x2-Input AND into 3-Input NOR
+AN222          AN222          AO222          OA222          AN222          ON222          ppppppN        nyyy           // 3x2-Input AND into 3-Input NOR
+AN311          AN311          AO311          OA311          AN311          ON311          pppppN         nyyy           // 3-Input AND into 3-Input NOR
+AN321          AN321          AO321          OA321          AN321          ON321          ppppppN        nyyy           // 3-Input AND, 2-Input AND into 3-Input NOR
+AN322          AN322          AO322          OA322          AN322          ON322          pppppppN       nyyy           // 3-Input AND, 2x2-Input AND into 3-Input NOR
+AN331          AN331          AO331          OA331          AN331          ON331          pppppppN       nyyy           // 2x3-Input AND into 3-Input NOR
+AN332          AN332          AO332          OA332          AN332          ON332          ppppppppN      nyyy           // 2x3-Input AND, 2-Input AND into 3-Input NOR
+AN333          AN333          AO333          OA333          AN333          ON333          pppppppppN     nyyy           // 3x3-Input AND into 3-Input NOR
+
+AND2           AND2           AND2           OR2            NA2            NO2            ppP            nyyy           // 2-Input AND (1234x)
+AND3           AND3           AND3           OR3            NA3            NO3            pppP           nyyy           // 3-Input AND (1234x)
+AND4           AND4           AND4           OR4            NA4            NO4            ppppP          nyyy           // 4-Input AND (1234x)
+AND5           AND5           AND5           OR5            NA5            NO5            pppppP         nyyy           // 5-Input AND (1234x)
+AND6           AND6           AND6           OR6            NA6            NO6            ppppppP        nyyy           // 6-Input AND (1234x)
+AND7           AND7           AND7           OR7            NA7            NO7            pppppppP       nyyy           // 7-Input AND (1234x)
+AND8           AND8           AND8           OR8            NA8            NO8            ppppppppP      nyyy           // 8-Input AND (1234x)
+
+AO21           AO21           AO21           OA21           AN21           ON21           pppP           nyyy           // 2-Input AND into 2-Input OR
+AO22           AO22           AO22           OA22           AN22           ON22           ppppP          nyyy           // 2x2-Input AND into 2-Input OR
+AO31           AO31           AO31           OA31           AN31           ON31           ppppP          nyyy           // 3-Input AND into 2-Input OR
+AO32           AO32           AO32           OA32           AN32           ON32           pppppP         nyyy           // 3-Input AND, 2-Input AND into 2-Input OR
+AO33           AO33           AO33           OA33           AN33           ON33           ppppppP        nyyy           // 2x3-Input AND into 2-Input OR
+AO211          AO211          AO211          OA211          AN211          ON211          ppppP          nyyy           // 2-Input AND into 3-Input OR
+AO221          AO221          AO221          OA221          AN221          ON221          pppppP         nyyy           // 2x2-Input AND into 3-Input OR
+AO222          AO222          AO222          OA222          AN222          ON222          ppppppP        nyyy           // 3x2-Input AND into 3-Input OR
+AO311          AO311          AO311          OA311          AN311          ON311          pppppP         nyyy           // 3-Input AND into 3-Input OR
+AO321          AO321          AO321          OA321          AN321          ON321          ppppppP        nyyy           // 3-Input AND, 2-Input AND into 3-Input OR
+AO322          AO322          AO322          OA322          AN322          ON322          pppppppP       nyyy           // 3-Input AND, 2x2-Input AND into 3-Input OR
+AO331          AO331          AO331          OA331          AN331          ON331          pppppppP       nyyy           // 2x3-Input AND into 3-Input OR
+AO332          AO332          AO332          OA332          AN332          ON332          ppppppppP      nyyy           // 2x3-Input AND, 2-Input AND into 3-Input OR
+AO333          AO333          AO333          OA333          AN333          ON333          pppppppppP     nyyy           // 3x3-Input AND into 3-Input OR
+
+BT1            BT1            _              _              _              _              ppP            nnnn           // Tri-State Buffer with active high enable (12348x)
+BT2            BT2            _              _              _              _              ppP            nnnn           // Tri-State Buffer with active low enable (12348x)
+
+BU             BU             BU             BU             IN             IN             pP             nnyy           // Noninverting Buffer (12348x)
+
+DF8            DF8            _              _              _              _              ppPNsdDDr      ynyn           // D-Type Flip-Flop (124x)
+DF9            DF9            _              _              _              _              ppPNnsdDDs     ynyn           // D-Type Flip-Flop with Set (124x)
+DFA            DFA            _              _              _              _              ppPNnsdDDs     ynyn           // D-Type Flip-Flop with Reset (124x)
+DFB            DFB            _              _              _              _              ppPNnnsdDDss   ynyn           // D-Type Flip-Flop with Set and Reset (124x)
+DFS8           DFS8           _              _              _              _              ppPNppsdDDdd   ynyn           // Scan D-Flip-Flop (124x)
+DFS9           DFS9           _              _              _              _              ppPNppnsdDDdds ynyn           // Scan D-Flip-Flop with Set (124x)
+DFSA           DFSA           _              _              _              _              ppPNnppsdDDsdd ynyn           // Scan D-Flip-Flop with Reset (124x)
+DFSB           DFSB           _              _              _              _            ppPNnppnsdDDsdds ynyn           // Scan D-Flip-Flop with Set and Reset (124x)
+
+DL8            DL8            _              _              _              _              pnPNdsDD       ynnn           // Data Latch (124x)
+DL8Z           DL8Z           _              _              _              _              pnnPddsD       ynnn           // Data Latch with Tristate Output (124x)
+DL9            DL9            _              _              _              _              pnPNndsDDs     ynnn           // Data Latch with Set (124x)
+DLA            DLA            _              _              _              _              pnPNndsDDs     ynnn           // Data Latch with Reset (124x)
+DLB            DLB            _              _              _              _              pnPNnndsDDss   ynnn           // Data Latch with Set and Reset (124x)
+
+empty          empty          BU1            BU1            _              _              pP             nnyn           // Empty module connecting input to output
+
+EN1            EN1            _              _              _              _              ppN            nnyy           // 2-Input XNOR (1234x)
+EN3            EN3            _              _              _              _              pppN           nnyy           // 3-Input XNOR (1234x)
+
+EO1            EO1            _              _              _              _              ppP            nnyy           // 2-Input XOR (1234x)
+EO3            EO3            _              _              _              _              pppP           nnyy           // 3-Input XOR (1234x)
+
+FA1            FA1            _              _              _              _              ppPP           nnyn           // Full-Adder (1234x)
+HA1            HA1            _              _              _              _              ppPP           nnyy           // Half-Adder (1234x)
+
+IMU2           IMU2           _              _              _              _              pppN           nyyy           // 2:1 Inverting Multiplexer (124x)
+IMU4           IMU4           _              _              _              _              ppppppN        nyyy           // 4:1 Inverting Multiplexer (124x)
+IMU8           IMU8           _              _              _              _              pppppppppppN   nyyy           // 8:1 Inverting Multiplexer (124x)
+
+IN             IN             BU             BU             IN             IN             pN             nnyy           // Inverter (12348x)
+
+INA2           INA2           AND2           OR2            NA2            NO2            npN            nyyy           // 2-Input NAND with one inverted input (1234x)
+INO2           INO2           OR2            AND2           NO2            NA2            npN            nyyy           // 2-Input NOR with one inverted input (1234x)
+
+IT1            IT1            _              _              _              _              ppP            nnnn           // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT2            IT2            _              _              _              _              ppP            nnnn           // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+
+JK9            JK9            _              _              _              _              pppPNnddsDDs   ynnn           // JK Flip-Flop with Set (124x)
+JKA            JKA            _              _              _              _              pppPNnddsDDs   ynnn           // JK Flip-Flop with Reset (124x)
+JKS9           JKS9           _              _              _              _            pppPNppnddsDDdds ynnn           // Scan JK Flip-Flop with Set (124x)
+JKSA           JKSA           _              _              _              _            pppPNppnddsDDdds ynnn           // JK Flip-Flop with Reset (124x)
+
+LOGIC0         LOGIC0         _              _              _              _              pPcr           ynyy           // Tie-Down to Logic Low-Level
+LOGIC1         LOGIC1         _              _              _              _              pPcr           ynyy           // Tie-Up to Logic High-Level
+
+MU2            MU2            _              _              _              _              pppP           nyyy           // 2:1 Multiplexer (124x)
+MU4            MU4            _              _              _              _              ppppppP        nyyy           // 4:1 Multiplexer (124x)
+MU8            MU8            _              _              _              _              pppppppppppP   nyyy           // 8:1 Multiplexer (124x)
+
+NA2            NA2            AND2           OR2            NA2            NO2            ppN            nyyy           // 2-Input NAND (1234x)
+NA3            NA3            AND3           OR3            NA3            NO3            pppN           nyyy           // 3-Input NAND (1234x)
+NA4            NA4            AND4           OR4            NA4            NO4            ppppN          nyyy           // 4-Input NAND (1234x)
+NA5            NA5            AND5           OR5            NA5            NO5            pppppN         nyyy           // 5-Input NAND (1234x)
+NA6            NA6            AND6           OR6            NA6            NO6            ppppppN        nyyy           // 6-Input NAND (1234x)
+NA7            NA7            AND7           OR7            NA7            NO7            pppppppN       nyyy           // 7-Input NAND (1234x)
+NA8            NA8            AND8           OR8            NA8            NO8            ppppppppN      nyyy           // 8-Input NAND (1234x)
+
+NO2            NO2            OR2            AND2           NO2            NA2            ppN            nyyy           // 2-Input NOR (1234x)
+NO3            NO3            OR3            AND3           NO3            NA3            pppN           nyyy           // 3-Input NOR (1234x)
+NO4            NO4            OR4            AND4           NO4            NA4            ppppN          nyyy           // 4-Input NOR (1234x)
+NO5            NO5            OR5            AND5           NO5            NA5            pppppN         nyyy           // 5-Input NOR (1234x)
+NO6            NO6            OR6            AND6           NO6            NA6            ppppppN        nyyy           // 6-Input NOR (1234x)
+NO7            NO7            OR7            AND7           NO7            NA7            pppppppN       nyyy           // 7-Input NOR (1234x)
+NO8            NO8            OR8            AND8           NO8            NA8            ppppppppN      nyyy           // 8-Input NOR (1234x)
+
+OA21           OA21           OA21           AO21           ON21           AN21           pppP           nyyy           // 2-Input OR into 2-Input AND
+OA22           OA22           OA22           AO22           ON22           AN22           ppppP          nyyy           // 2x2-Input OR into 2-Input AND
+OA31           OA31           OA31           AO31           ON31           AN31           ppppP          nyyy           // 3-Input OR into 2-Input AND
+OA32           OA32           OA32           AO32           ON32           AN32           pppppP         nyyy           // 3-Input OR, 2-Input OR into 2-Input AND
+OA33           OA33           OA33           AO33           ON33           AN33           ppppppP        nyyy           // 2x3-Input OR into 2-Input AND
+OA211          OA211          OA211          AO211          ON211          AN211          ppppP          nyyy           // 2-Input OR into 3-Input AND
+OA221          OA221          OA221          AO221          ON221          AN221          pppppP         nyyy           // 2x2-Input OR into 3-Input AND
+OA222          OA222          OA222          AO222          ON222          AN222          ppppppP        nyyy           // 3x2-Input OR into 3-Input AND
+OA311          OA311          OA311          AO311          ON311          AN311          pppppP         nyyy           // 3-Input OR into 3-Input AND
+OA321          OA321          OA321          AO321          ON321          AN321          ppppppP        nyyy           // 3-Input OR, 2-Input OR into 3-Input AND
+OA322          OA322          OA322          AO322          ON322          AN322          pppppppP       nyyy           // 3-Input OR, 2x2-Input OR into 3-Input AND
+OA331          OA331          OA331          AO331          ON331          AN331          pppppppP       nyyy           // 2x3-Input OR into 3-Input AND
+OA332          OA332          OA332          AO332          ON332          AN332          ppppppppP      nyyy           // 2x3-Input OR, 2-Input OR into 3-Input AND
+OA333          OA333          OA333          AO333          ON333          AN333          pppppppppP     nyyy           // 3x3-Input OR into 3-Input AND
+
+ON21           ON21           OA21           AO21           ON21           AN21           pppN           nyyy           // 2-Input OR into 2-Input NAND
+ON22           ON22           OA22           AO22           ON22           AN22           ppppN          nyyy           // 2x2-Input OR into 2-Input NAND
+ON31           ON31           OA31           AO31           ON31           AN31           ppppN          nyyy           // 3-Input OR into 2-Input NAND
+ON32           ON32           OA32           AO32           ON32           AN32           pppppN         nyyy           // 3-Input OR, 2-Input OR into 2-Input NAND
+ON33           ON33           OA33           AO33           ON33           AN33           ppppppN        nyyy           // 2x3-Input OR into 2-Input NAND
+ON211          ON211          OA211          AO211          ON211          AN211          ppppN          nyyy           // 2-Input OR into 3-Input NAND
+ON221          ON221          OA221          AO221          ON221          AN221          pppppN         nyyy           // 2x2-Input OR into 3-Input NAND
+ON222          ON222          OA222          AO222          ON222          AN222          ppppppN        nyyy           // 3x2-Input OR into 3-Input NAND
+ON311          ON311          OA311          AO311          ON311          AN311          pppppN         nyyy           // 3-Input OR into 3-Input NAND
+ON321          ON321          OA321          AO321          ON321          AN321          ppppppN        nyyy           // 3-Input OR, 2-Input OR into 3-Input NAND
+ON322          ON322          OA322          AO322          ON322          AN322          pppppppN       nyyy           // 3-Input OR, 2x2-Input OR into 3-Input NAND
+ON331          ON331          OA331          AO331          ON331          AN331          pppppppN       nyyy           // 2x3-Input OR into 3-Input NAND
+ON332          ON332          OA332          AO332          ON332          AN332          ppppppppN      nyyy           // 2x3-Input OR, 2-Input OR into 3-Input NAND
+ON333          ON333          OA333          AO333          ON333          AN333          pppppppppN     nyyy           // 3x3-Input OR into 3-Input NAND
+
+OR2            OR2            OR2            AND2           NO2            NA2            ppP            nyyy           // 2-Input OR (1234x)
+OR3            OR3            OR3            AND3           NO3            NA3            pppP           nyyy           // 3-Input OR (1234x)
+OR4            OR4            OR4            AND4           NO4            NA4            ppppP          nyyy           // 4-Input OR (1234x)
+OR5            OR5            OR5            AND5           NO5            NA5            pppppP         nyyy           // 5-Input OR (1234x)
+OR6            OR6            OR6            AND6           NO6            NA6            ppppppP        nyyy           // 6-Input OR (1234x)
+OR7            OR7            OR7            AND7           NO7            NA7            pppppppP       nyyy           // 7-Input OR (1234x)
+OR8            OR8            OR8            AND8           NO8            NA8            ppppppppP      nyyy           // 8-Input OR (1234x)
+
+SIGNALHOLD     SIGNALHOLD     _              _              _              _              pP             nnnn           // Bus Holder
+
+spinv          spinv          _              _              IN             IN             pP             nnny           // Spacer Inverter (12348x)
+
+SR2DR          SR2DR          _              _              _              _              ppPNssSS       ynyy           // SR2DR
+DR2SR          DR2SR          _              _              _              _              pnPssS         ynyy           // DR2SR
