@@ -1,0 +1,580 @@
+<html>
+  <header>
+    <title>
+      VeriMap
+    </title>
+  </header>
+  <body>
+
+<h1>
+VeriMap
+</h1>
+
+<p>
+<b>VeriMap</b> is a tool for converting single-rail RTL netlists into 
+a dual-rail circuits resistant to DPA attacks. Its main features are:
+
+<ul>
+<li>
+  Easy to integrate in a conventional EDA flow.
+</li>
+<li>
+  Generated circuits are hazard free and preserve all DFT features 
+  incorporated at the logic synthesis stage.
+</li>
+<li>
+  Support for two architectures: self-timed dual-rail or clocked dual-rail.
+</li>
+<li>
+  Negative logic optimisation to reduce the size of the circuit 
+  and shorten the critical path.
+</li>
+<li>
+  Alternating spacer protocol to resist DPA attacks by 
+  making the power consumption data-independent.
+</li>
+</ul>
+</p>
+
+<h2>
+Download and installation
+</h2>
+
+<p>
+The latest release of the tool can be found on 
+<a href="http://async.org.uk/screen/verimap/">VeriMap homepage</a>:
+<ul>
+<li>
+<a href="http://async.org.uk/screen/verimap/verimap-1.2.tar.gz">
+Linux binaries
+</a>
+</li>
+
+<li>
+<a href="http://async.org.uk/screen/verimap/verimap-1.2.ams_csx.tar.gz">
+Conversion libraries for AMS 0.35&mu;m csx technology (version 3.3)
+</a>
+</li>
+
+<li>
+<a href="http://async.org.uk/screen/verimap/verimap-1.2.ams_c35b4.tar.gz">
+Conversion libraries for AMS 0.35&mu;m c35b4 technology (version 3.5)
+</a>
+</li>
+
+<li>
+<a href="http://async.org.uk/screen/verimap/verimap-1.2.src.tar.gz">
+Source code
+</a>
+</li>
+
+<li>
+<a href="http://async.org.uk/screen/verimap/verimap-1.2.benchmarks.tar.gz">
+Benchmarks
+</a>
+</li>
+
+</ul>
+</p>
+
+<p>
+The compilation of VeriMap tool from source is performed by the following command:
+<pre>
+<code>
+  $ make
+</code>
+</pre>
+</p>
+
+<p>
+This will compile a binary called <code>verimap</code>. In order to start using 
+the tool put this binary into a directory, which is referenced from the 
+<code>PATH</code> environment variable (e.g. <code>/usr/local/bin/</code>). 
+This can be done by running the following command as root:
+<pre>
+<code>
+  $ make install
+</code>
+</pre>
+</p>
+
+<p>
+If you already have an executable of the VeriMap tool, then just copy it 
+into a directory which is referenced from your <code>PATH</code> environment 
+variable.
+<p>
+
+<h2>
+Changes and ToDo list
+</h2>
+
+<p>
+Changes in VeriMap version 1.2 comparing to version 1.1:
+<ul>
+<li>
+The algorithm for optimisation of completion logic is improved. Now it takes 
+into account real delays of the gates instead of abstract "unit" delays. 
+Thanks to Andrey Mokhov for the algorithm and the code.
+</li>
+<li>
+A new command line parameter <code>-f FULL_FILE_NAME</code> or 
+<code>--full FULL_FILE_NAME</code> is added. It produces a file 
+<code>FULL_FILE_NAME</code> which contains a resultant circuit netlist together 
+with all required dual-rail modules (both generated and pre-defined).
+Thanks to Karthik Baddam for the idea and testing of this feature.
+</li>
+<li>
+Minor corrections to the conversion libraries for AMS 0.35&mu;m c35b4 
+technology (version 3.5)
+</li>
+</ul>
+</p>
+
+<p>
+Changes in VeriMap version 1.1 comparing to version 1.0:
+<ul>
+<li>
+The speed of hierarchy calculation is improved significantly
+</li>
+<li>
+Minor modifications to the conversion libraries for AMS 0.35&mu;m csx 
+technology (version 3.3)
+</li>
+<li>
+Added conversion libraries for AMS 0.35&mu;m c35b4 technology (version 3.5)
+</li>
+</ul>
+</p>
+
+<p>
+ToDo list:
+<ul>
+<li>
+  Automate (or simplify) the process of transformation rules library generation.
+</li>
+<li>
+  Improve the power consumption by applying clock gating and data guarding.
+</li>
+<li>
+  Decrease the size of the resultant circuits by selective dual-railing.
+</li>
+<li>
+  <s>Improve the naive algorithm for optimisation of completion logic</s> 
+  (new method proposed by Andrey Mokhov, University of Newcastle in 
+  [<a href=#ref_4>4</a>]).
+</li>
+<li>
+  <s>Output all generated and pre-designed modules required by a produced 
+  dual-rail circuit in one file</s> (feature requested by Karthik Baddam, 
+  University of Southamton).
+</li>
+<li>
+  <s>Fabricate a demonstrator and try an actual DPA attack.</s>
+</li>
+<li>
+  <s>Improve the computation speed.</s>
+</li>
+<li>
+  <s>Add support for AMS 0.35&mu;m c35b4 technology (version 3.5).</s>
+</li>
+</ul>
+</p>
+
+
+<h2>
+Usage of the toolkit
+</h2>
+
+<p>
+The VeriMap design kit converts single-rail RTL netlists into dual-rail 
+circuits which are resistant to Differential Power Analysis (DPA) attacks. 
+VeriMap design kit successfully interfaces to the Cadence CAD tools. It 
+takes as input a structural Verilog netlist file, created by Cadence Ambit 
+(or another logic synthesis tool), and converts it into dual-rail netlist. 
+The resulting netlist can then be processed by Cadence or other EDA tools. 
+All Design For Testability (DFT) features incorporated at the logic synthesis 
+stage are preserved.
+</p>
+
+<table>
+<tr>
+<td>
+The VeriMap design flow (see the figure) consists of the following parts:
+<ul>
+<li>
+  a library of gate prototypes;
+</li>
+<li>
+  a library of transformation rules;
+</li>
+<li>
+  a library of gate attributes;
+</li>
+<li>
+  a software tool called <code>verimap</code>.
+</li>
+</ul>
+The design kit is supplied with a set of libraries for AMS 0.35&mu;m technology. 
+After some modification these libraries can be used for other technologies. 
+Their formats are described in the following sections.
+</td>
+
+<td>
+  <img src="verimap.gif" alt="VeriMap design flow">
+</td>
+</tr>
+</table>
+</p>
+
+<h3>
+Library of gate prototypes
+</h3>
+
+<p>
+The library of gate prototypes is a set of Verilog files containing three types of gates:  
+<ul>
+<li>
+  single-rail gates;  
+</li>
+<li>
+  manually designed converters and controllers;
+</li>
+
+<li>
+  manually designed dual-rail gates.
+</li>
+</ul>
+</p>
+
+<p>
+The definitions of all single-rail gates which are instantiated in the circuit 
+under conversion have to be in the library. These definitions are used by 
+VeriMap to determine which connections of the gate are inputs and which are 
+outputs. The implementation of these gates is not important and can be skipped.
+</p>
+
+<p>
+The converters between single-rail and dual-rail domains, go-controller and 
+spacer-controller are also defined in this library. This gates cannot be produced 
+automatically by the tool and must be created manually for each design technology.
+</p>
+
+<p>
+The library can also contain implementations of some dual-rail gates. The 
+predefined dual-rail gates are used when the automatic conversion of a 
+single-rail gate into dual-rail is impossible or gives a poor result. 
+Typical examples for such gates are multiplexers, flip-flops and latches. 
+</p>
+
+
+<h3>
+Library of transformation rules
+</h3>
+
+<p>
+The library of rules for gate transformation defines how to convert a single-rail 
+gate into a dual-rail one. If a predefined dual-rail implementation of a gate is 
+found in the library of gate prototypes, then the tool uses it. Otherwise a dual-rail 
+implementation is built automatically using these rules. Each line of this library 
+defines one rule. A rule consist of the following space-separated fields: 
+<ul>
+<li>
+  <i>single_rail</i> - the name of a single-rail gate to which the rule applies;
+</li>
+
+<li>
+  <i>dual_rail</i> - the name of a corresponding dual-rail gate (usually it is 
+  the same as <i>single_rail</i>);
+</li>
+
+<li>
+  <i>direct_positive</i> - the name of a positive gate which implements the 
+  function of the single-rail gate; 
+</li>
+
+<li>
+  <i>complementary_positive</i> - the name of a positive gate which implements 
+  the function complementary to the single-rail gate; 
+</li>
+
+<li>
+  <i>direct_negative</i> - the name of a negative gate which implements the 
+  function of the single-rail gate; 
+</li>
+
+<li>
+  <i>complementary_negative</i> - the name of a negative gate which implements 
+  the function complementary to the <i>single_rail</i> gate; 
+</li>
+
+<li>
+  <i>interface_polarity</i> - a sequence of characters defining in a position 
+  code which ports of the single-rail gate are inputs (encoded by small 
+  characters) and which are outputs (encoded by capital letters). The 
+  characters also encode how the gate inputs and outputs are converted: 
+  <ul>
+  <li>
+    <i>p</i> - a direct (positive) input;
+  </li>
+  <li>
+    <i>n</i> - an inverted (negative) input, its rails should be crossed;
+  </li>
+  <li>
+    <i>P</i> - a direct (positive) output, its rails should be crossed when 
+    the gate is converted into a negative dual-rail logic;
+  </li>
+  <li>
+    <i>N</i> - an inverted (negative) output, its rails should be crossed when 
+    the gate is converted into a positive dual-rail logic;
+  </li>
+  <li>
+    <i>d</i> - a data input, which should be converted into dual-rail 
+    (by default)
+  </li>
+  <li>
+    <i>s</i> - a control input, which is not converted and stays single-rail 
+    (e.g., clock and reset inputs)
+  </li>
+  <li>
+    <i>D</i> - a data output, which should be converted into dual-rail 
+    (by default)
+  </li>
+  <li>
+    <i>S</i> - a control output, which is not converted and stays single-rail 
+    (e.g., output of a controller generating local clock or reset signals)
+  </li>
+  <li>
+    <i>r</i> - a dual-rail implementation of the gate requires an additional 
+    reset signal;
+  </li>
+  <li>
+    <i>c</i> - a dual-rail implementation of the gate requires an additional 
+    clock signal.
+  </li>
+  </ul>
+</li>
+
+<li>
+  <i>flags</i> - is a string of four characters answering the following sequence 
+  of questions (y for yes, n for no):
+  <ol>
+  <li>
+    Is this rule for a flip-flop or a latch?
+  </li>
+  <li>
+    Does a dual-rail gate obtained by this rule have early propagation?
+  </li>
+  <li>
+    Should the positive gates listed in <i>direct_positive</i> and 
+    <i>complementary_positive</i>  be taken into account when optimising 
+    for size and speed?
+  </li>
+  <li>
+    Should the negative gates listed in <i>direct_negative</i> and 
+    <i>complementary_negative</i> be taken into account when optimising 
+    for size and speed?
+  </li>
+  </ol>  
+</li>
+</ul>
+</p>
+
+
+<h3>
+Library of gate parameters
+</h3>
+
+<p>
+The negative gate optimisation usually improves the size and speed of a 
+dual-rail circuit. However, for a negative gate with high output drive it is 
+not true, because such a gate consists of a positive gate and a strong 
+inverter attached to the output. A library of gate attributes, is useful in 
+such a case. For each single-rail gate it helps to chose the optimal dual-rail 
+gate between its negative-logic and positive-logic implementations. 
+If this library is missing, then the negative-logic dual-rail implementation 
+is preferred. 
+</p>
+
+<p>
+The library consists of two sections. The first section lists the names of 
+attributes, which are associated with each library gate. The second section 
+assigns the values of these attributes to the gates.
+</p>
+
+
+<h3>
+VeriMap software tool
+</h3>
+
+<p>
+The main function of the tool is conversion of a single-rail RTL netlist into 
+a dual-rail netlist of either of two architectures: self-timed and clocked. 
+It is done in four stages. Firstly, a single-rail circuit is converted into 
+positive logic dual-rail. Secondly, the positive dual-rail gates are replaced 
+by negative dual-rail gates and the spacer polarity inverters are inserted. 
+This is the negative gate optimisation [<a href=#ref_1>1</a>]. Then, the 
+completion signal is generated (asynchronous design only)  [<a href=#ref_2>2</a>]. 
+Finally, a wrapper module connecting the dual-rail circuit to the single-rail 
+environment is added (optional). 
+</p>
+
+<p>
+Using the standard dual-rail protocol with a single spacer has certain 
+balancing problems due to the asymmetry between logic gates within a dual-rail 
+gate. We addressed and solved these problems in [<a href=#ref_3>3</a>] by 
+using a new protocol with two spacers alternating in time leading to all gates 
+switching within every clock cycle. The tool supports the alternating spacer 
+protocol.
+</p>
+
+<p>
+Apart from generating netlists, VeriMap tool reports statistics for the 
+original and resultant circuits: estimated area of combinational logic and 
+flip-flops, number of negative gates and transistors, number of wires.
+</p>
+
+<p>
+The tool also generates a behavioural Verilog file assisting the power 
+analysis of the original and resultant circuits. Being included into 
+simulation testbench these Verilog counts the number of switching events 
+in each wire of the circuits.
+</p>
+
+<p>
+The detail list of VeriMap command line parameters and their meaning follows.
+</p>
+
+<p>
+<pre>
+<code>
+USAGE: 
+  verimap [OPTIONS] [INPUT_FILE_NAMES] 
+FILE OPTIONS:
+  -o,  --output OUTPUT_FILE_NAME  netlist output file [STDOUT]
+  -f,  --full FULL_FILE_NAME      full netlist output file []
+  -i,  --include INC_FILE_NAMES   library input files [STDIN]
+  -l,  --library LIB_FILE_NAME    library output file []
+  -g,  --generate GEN_FILE_NAME   generated modules input-output file [STDOUT]
+  -r,  --rules RULES_FILE_NAMES   rules for gate transformation input files []
+  -p,  --params PARAMS_FILE_NAMES parameters of modules input files []
+  -a,  --assignments ASSIGNMENTS_FILE_NAMES assignments input files []
+  -cn, --completion-nets COMPLETION_FILE_NAMES completion nets input files []
+  *_FILE_NAMES is a coma separated list of files for reading
+TRANSFORMATION OPTIONS:
+  -tl, --transformation-level[TL] transformation level (TL=[0],1,2,3)
+       0 = no circuit transformation, the netlist is re-formatted only
+       1 = calculate the optimisation possibilities only, the output circuit
+           is still single-rail
+       2 = convert the circuit into dual-rail
+       3 = build completion detection logic, add go input and done output
+  -cd, --completion-delay[CD]     completion delay in gate number (CD=[0],1...)
+  -as, --alternating-spacer       optimise for alternating spacer protocol
+  -srw,--single-rail-wrapper      build a single-rail wrapper
+OPTIMISATION OPTIONS:
+  -ol, --optimisation-level[OL]    optimisation level (OL=[0],1,2)
+       0 = no optimisation (positive gates)
+       1 = optimisation for negative gates or for specified parameters given
+           by --optimisation-params option
+       2 = optimisation of spacer converters distribution
+  -op, --optimisation-params PARAM_NAMES optimise for parameters []
+       PARAM_NAMES is a coma separated list of parameter names which are
+       specified in the files provided by --params option
+  -gd, --gate-delay-param PARAM_NAME name of the cell delay parameter []
+       PARAM_NAME is parameter name which is specified in the files
+       provided by --params option
+STRUCTURE OPTIONS:
+  -tm, --topmost-module MODULE_NAME name of the topmost module
+  -buf,--buffer                   buffer SPACER and DONE signals
+  -ra, --reset-active[RA]         reset active level (RA=[0],1)
+       0 = active-0 reset, 1 = active-1 reset
+  -rst,--reset PORT_NAMES         names of reset ports [*.rst]
+  -clk,--clock PORT_NAMES         names of clock ports [*.clk]
+  -sp0,--spacer-0 PORT_NAMES      spacer-0 ports [*.*]
+  -sp1,--spacer-1 PORT_NAMES      spacer-1 ports []
+       PORT_NAMES is a comma-separated list of MODULE_NAME.PORT_NAME
+         MODULE_NAME.* = all ports of the MODULE_NAME module
+         *.PORT_NAME   = port PORT_NAME of all modules
+         *.*           = all ports of all modules
+         PORT_NAME     = port PORT_NAME of the topmost module
+STATISTICS OPTIONS:
+  -s,  --statistics STAT_FILE_NAME statistics output file [STDOUT]
+  -sl, --statistics-level[SL]     statistics output level (SL=[0],1,2,3)
+       0 = no statistics is collected
+       1 = statistics is collected for single-rail circuit only
+       2 = statistics is collected for dual-rail circuit only
+       3 = statistics is collected for both single- and dual-rail circuits
+CONES OPTIONS:
+  -c,  --cones CONES_FILE_NAME    cones output file name [-]
+  -cl, --cones-level[CL]          cones output level (CL=[0],1,2,3)
+       0 = table of cones intersection only
+       1 = output nets in each cone
+       2 = output nets and instances in each cone
+       3 = additional comments for cones layers
+  -cv, --cones-vertex ITEM_NAMES  list of vertex items to build the cones
+       ITEM_NAMES is a comma-separated list of MODULE_NAME.ITEM_NAME
+         ITEM_NAME is either net or instance name
+         MODULE_NAME.* = all nets and instances of the MODULE_NAME module
+         *.ITEM_NAME   = item ITEM_NAME of all modules
+         *.*           = all nets and instances of all modules
+         ITEM_NAME     = item ITEM_NAME of the topmost module
+SWITCHING ACTIVITY OPTIONS:
+  -w,  --wires WIRES_FILE_NAME    wires switching output file [STDOUT]
+  -wl, --wires-level[WL]          wires switching output level (WL=[0],1,2,3)
+       0 = no wires switching analysis
+       1 = wires switching is analysed for single-rail circuit only
+       2 = wires switching is analysed for dual-rail circuit only
+       3 = wires switching is analysed for both single- and dual-rail circuits
+  -wp, --wires-pattern PATTERN    wires output pattern [always @(?) c=c+1;]
+       Question mark ? in the PATTERN is replaced by the wires full names
+TIMING ANALYSIS OPTIONS:
+  -cmd CMD_FILE_NAME              Pearl timing analysis command file
+  -gcf GCF_FILE_NAME              GCF file for timing analysis
+  -pp, --path-possibility[N]      consider top-N path possibilities (N=[1],2...)
+INFORMATION OPTIONS:
+  -h,  --help                     print this help only
+  -v,  --version                  print version only
+</code>
+</pre>
+</p>
+
+<h2>
+References
+</h2>
+
+<ol>
+<li>
+<a name=ref_1>
+A.Bystrov, D.Sokolov, A.Yakovlev, A.Koelmans: 
+"Balancing Power Signature in Secure Systems". 
+14th UK Asynchronous Forum, Newcastle, June 2003.
+</a>
+</li>
+
+<li>
+<a name=ref_2>
+D.Sokolov, J.Murphy, A.Bystrov, A.Yakovlev:
+"Improving the security of dual-rail circuits",
+In Proc. Workshop Cryptographic Hardware and Embedded Systems (CHES), August 2004.
+</a>
+</li>
+
+<li>    
+<a name=ref_3>
+D.Sokolov, J.Murphy, A.Bystrov, A.Yakovlev: 
+"Design and analysis of dual-rail circuits for security applications", 
+IEEE Transactions on Computers, Volume 54(4), pages 449-460, April 2005.
+</a>
+</li>
+
+<li>    
+<a name=ref_4>
+A.Mokhov, D.Sokolov, A.Yakovlev: 
+"Completion detection optimisation based on relative timing", 
+In Proc. 18th UK Asynchronous Forum, September 2006.
+</a>
+</li>
+</ol>       
+
+  </body>
+</html>
+
