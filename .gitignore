@@ -3,3 +3,24 @@
 /.cdtproject
 /.cproject
 /.project
+# Dependency files and object files
+/src/*.d
+/src/*.o
+# Generated parser files
+/src/assignments_l.c
+/src/assignments_y.c
+/src/assignments_y.h
+/src/objects_l.c
+/src/objects_y.c
+/src/objects_y.h
+/src/parameters_l.c
+/src/parameters_y.c
+/src/parameters_y.h
+/src/rules_l.c
+/src/rules_y.c
+/src/rules_y.h
+/src/sverilog_l.c
+/src/sverilog_y.c
+/src/sverilog_y.h
+# VeriMap binary
+/src/verimap
