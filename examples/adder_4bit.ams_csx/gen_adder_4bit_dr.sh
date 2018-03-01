@@ -1,13 +1,8 @@
-rm -f adder_4bit_stat.txt
-verimap \
--r ams.rls \
--a ams.asn \
--p ams.prm \
--g ams_dr-gen.v \
--i ams.v,ams_dr-cl.v,ams_sr-misc.v,ams_sr-c.v \
--o adder_4bit_dr.v \
-adder_4bit_sr.v \
--ol2 -tl2 -cd1 \
--gd gate_delay \
--sl3 -s adder_4bit_stat.txt \
--clk *.clk -rst *.reset
+rm -f ams_dr-gen.v
+#valgrind --tool=memcheck -v --leak-check=yes --show-reachable=yes --leak-resolution=low --num-callers=8 --suppressions=valgrind.supp \
+../../src/verimap \
+-a ams.asn -r ams.rls -p ams.prm,ams.rti -g ams_dr-gen.v \
+-i ams.v,ams_sr-misc.v,ams_sr-c.v,ams_dr-cl.v,ams_adr-cnv.v,ams_adr-df_ta_clk2.v \
+-o adder_4bit_dr.v adder_4bit_sr.v \
+-ol3 -tl2 -as -op area,transistor_number \
+-clk *.clk -rst *.rst -ra1

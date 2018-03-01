@@ -1,12 +1,17 @@
 // The list of module parameters
-
+// Format: '[' NAME ':' ['-' | '+' | '*'] {,...} ']'
+//   '-' - ignoring parameter in statistics
+//   '+' - accumulating parameter in statistics
+//   '*' - averaging parameter in statistics
+//   '\' - minimising parameter in statistics
+//   '/' - maximising parameter in statistics
 [
-gate_delay,           // gate delay in "simple negative gate" number
-negative_gate_number, // number of negative gates
-invertor_number,      // number of invertors
-flip_flop_number,     // number of flip-flops
-transistor_number,    // number of transistors
-area                  // area of the module in square microns
+gate_delay : -,           // gate delay in "simple negative gate" number
+negative_gate_number : +, // number of negative gates
+invertor_number : +,      // number of invertors
+flip_flop_number : +,     // number of flip-flops
+transistor_number : +,    // number of transistors
+area : +                  // area of the module in square microns
 ]
 
 /*
@@ -75,16 +80,16 @@ AO331         2,2,1,0,14,219        // 2x3-Input AND into 3-Input OR
 AO332         2,2,1,0,16,200        // 2x3-Input AND, 2-Input AND into 3-Input OR // !!! smaller than AN332
 AO333         2,2,1,0,18,219        // 3x3-Input AND into 3-Input OR // !!! smaller than AN333
 
-BT1           2,-,-,0,10,146        // Tri-State Buffer with active high enable (12348x)
-BT12          2,-,-,0,10,146        // Tri-State Buffer with active high enable (12348x)
-BT13          2,-,-,0,10,164        // Tri-State Buffer with active high enable (12348x)
-BT14          2,-,-,0,10,164        // Tri-State Buffer with active high enable (12348x)
-BT18          2,-,-,0,10,200        // Tri-State Buffer with active high enable (12348x)
-BT2           2,-,-,0,10,146        // Tri-State Buffer with active low enable (12348x)
-BT22          2,-,-,0,10,146        // Tri-State Buffer with active low enable (12348x)
-BT23          2,-,-,0,10,164        // Tri-State Buffer with active low enable (12348x)
-BT24          2,-,-,0,10,164        // Tri-State Buffer with active low enable (12348x)
-BT28          2,-,-,0,10,200        // Tri-State Buffer with active low enable (12348x)
+BT1           2, , ,0,10,146        // Tri-State Buffer with active high enable (12348x)
+BT12          2, , ,0,10,146        // Tri-State Buffer with active high enable (12348x)
+BT13          2, , ,0,10,164        // Tri-State Buffer with active high enable (12348x)
+BT14          2, , ,0,10,164        // Tri-State Buffer with active high enable (12348x)
+BT18          2, , ,0,10,200        // Tri-State Buffer with active high enable (12348x)
+BT2           2, , ,0,10,146        // Tri-State Buffer with active low enable (12348x)
+BT22          2, , ,0,10,146        // Tri-State Buffer with active low enable (12348x)
+BT23          2, , ,0,10,164        // Tri-State Buffer with active low enable (12348x)
+BT24          2, , ,0,10,164        // Tri-State Buffer with active low enable (12348x)
+BT28          2, , ,0,10,200        // Tri-State Buffer with active low enable (12348x)
 
 BU1           2,2,2,0,4,73          // Noninverting Buffer (12348x)
 BU2           2,2,2,0,4,73          // Noninverting Buffer (12348x)
@@ -92,46 +97,46 @@ BU3           2,2,2,0,4,91          // Noninverting Buffer (12348x)
 BU4           2,2,2,0,4,91          // Noninverting Buffer (12348x)
 BU8           2,2,2,0,4,127         // Noninverting Buffer (12348x)
 
-DF8           0,-,-,1,-,237         // D-Type Flip-Flop (124x)
-DF82          0,-,-,1,-,291         // D-Type Flip-Flop (124x)
-DF84          0,-,-,1,-,310         // D-Type Flip-Flop (124x)
-DF9           0,-,-,1,-,310         // D-Type Flip-Flop with Set (124x)
-DF92          0,-,-,1,-,310         // D-Type Flip-Flop with Set (124x)
-DF94          0,-,-,1,-,346         // D-Type Flip-Flop with Set (124x)
-DFA           0,-,-,1,-,346         // D-Type Flip-Flop with Reset (124x)
-DFA2          0,-,-,1,-,346         // D-Type Flip-Flop with Reset (124x)
-DFA4          0,-,-,1,-,364         // D-Type Flip-Flop with Reset (124x)
-DFB           0,-,-,1,-,382         // D-Type Flip-Flop with Set and Reset (124x)
-DFB2          0,-,-,1,-,382         // D-Type Flip-Flop with Set and Reset (124x)
-DFB4          0,-,-,1,-,419         // D-Type Flip-Flop with Set and Reset (124x)
-DFS8          0,-,-,1,-,382         // Scan D-Flip-Flop (124x)
-DFS82         0,-,-,1,-,401         // Scan D-Flip-Flop (124x)
-DFS84         0,-,-,1,-,419         // Scan D-Flip-Flop (124x)
-DFS9          0,-,-,1,-,437         // Scan D-Flip-Flop with Set (124x)
-DFS92         0,-,-,1,-,437         // Scan D-Flip-Flop with Set (124x)
-DFS94         0,-,-,1,-,473         // Scan D-Flip-Flop with Set (124x)
-DFSA          0,-,-,1,-,419         // Scan D-Flip-Flop with Reset (124x)
-DFSA2         0,-,-,1,-,419         // Scan D-Flip-Flop with Reset (124x)
-DFSA4         0,-,-,1,-,455         // Scan D-Flip-Flop with Reset (124x)
-DFSB          0,-,-,1,-,492         // Scan D-Flip-Flop with Set and Reset (124x)
-DFSB2         0,-,-,1,-,492         // Scan D-Flip-Flop with Set and Reset (124x)
-DFSB4         0,-,-,1,-,528         // Scan D-Flip-Flop with Set and Reset (124x)
+DF8           0, , ,1, ,237         // D-Type Flip-Flop (124x)
+DF82          0, , ,1, ,291         // D-Type Flip-Flop (124x)
+DF84          0, , ,1, ,310         // D-Type Flip-Flop (124x)
+DF9           0, , ,1, ,310         // D-Type Flip-Flop with Set (124x)
+DF92          0, , ,1, ,310         // D-Type Flip-Flop with Set (124x)
+DF94          0, , ,1, ,346         // D-Type Flip-Flop with Set (124x)
+DFA           0, , ,1, ,346         // D-Type Flip-Flop with Reset (124x)
+DFA2          0, , ,1, ,346         // D-Type Flip-Flop with Reset (124x)
+DFA4          0, , ,1, ,364         // D-Type Flip-Flop with Reset (124x)
+DFB           0, , ,1, ,382         // D-Type Flip-Flop with Set and Reset (124x)
+DFB2          0, , ,1, ,382         // D-Type Flip-Flop with Set and Reset (124x)
+DFB4          0, , ,1, ,419         // D-Type Flip-Flop with Set and Reset (124x)
+DFS8          0, , ,1, ,382         // Scan D-Flip-Flop (124x)
+DFS82         0, , ,1, ,401         // Scan D-Flip-Flop (124x)
+DFS84         0, , ,1, ,419         // Scan D-Flip-Flop (124x)
+DFS9          0, , ,1, ,437         // Scan D-Flip-Flop with Set (124x)
+DFS92         0, , ,1, ,437         // Scan D-Flip-Flop with Set (124x)
+DFS94         0, , ,1, ,473         // Scan D-Flip-Flop with Set (124x)
+DFSA          0, , ,1, ,419         // Scan D-Flip-Flop with Reset (124x)
+DFSA2         0, , ,1, ,419         // Scan D-Flip-Flop with Reset (124x)
+DFSA4         0, , ,1, ,455         // Scan D-Flip-Flop with Reset (124x)
+DFSB          0, , ,1, ,492         // Scan D-Flip-Flop with Set and Reset (124x)
+DFSB2         0, , ,1, ,492         // Scan D-Flip-Flop with Set and Reset (124x)
+DFSB4         0, , ,1, ,528         // Scan D-Flip-Flop with Set and Reset (124x)
 
-DL8           0,-,-,1,-,200         // Data Latch (124x)
-DL82          0,-,-,1,-,200         // Data Latch (124x)
-DL84          0,-,-,1,-,237         // Data Latch (124x)
-DL8Z          0,-,-,1,-,219         // Data Latch with Tristate Output (124x)
-DL8Z2         0,-,-,1,-,255         // Data Latch with Tristate Output (124x)
-DL8Z4         0,-,-,1,-,328         // Data Latch with Tristate Output (124x)
-DL9           0,-,-,1,-,237         // Data Latch with Set (124x)
-DL92          0,-,-,1,-,237         // Data Latch with Set (124x)
-DL94          0,-,-,1,-,273         // Data Latch with Set (124x)
-DLA           0,-,-,1,-,273         // Data Latch with Reset (124x)
-DLA2          0,-,-,1,-,291         // Data Latch with Reset (124x)
-DLA4          0,-,-,1,-,310         // Data Latch with Reset (124x)
-DLB           0,-,-,1,-,273         // Data Latch with Set and Reset (124x)
-DLB2          0,-,-,1,-,273         // Data Latch with Set and Reset (124x)
-DLB4          0,-,-,1,-,310         // Data Latch with Set and Reset (124x)
+DL8           0, , ,1, ,200         // Data Latch (124x)
+DL82          0, , ,1, ,200         // Data Latch (124x)
+DL84          0, , ,1, ,237         // Data Latch (124x)
+DL8Z          0, , ,1, ,219         // Data Latch with Tristate Output (124x)
+DL8Z2         0, , ,1, ,255         // Data Latch with Tristate Output (124x)
+DL8Z4         0, , ,1, ,328         // Data Latch with Tristate Output (124x)
+DL9           0, , ,1, ,237         // Data Latch with Set (124x)
+DL92          0, , ,1, ,237         // Data Latch with Set (124x)
+DL94          0, , ,1, ,273         // Data Latch with Set (124x)
+DLA           0, , ,1, ,273         // Data Latch with Reset (124x)
+DLA2          0, , ,1, ,291         // Data Latch with Reset (124x)
+DLA4          0, , ,1, ,310         // Data Latch with Reset (124x)
+DLB           0, , ,1, ,273         // Data Latch with Set and Reset (124x)
+DLB2          0, , ,1, ,273         // Data Latch with Set and Reset (124x)
+DLB4          0, , ,1, ,310         // Data Latch with Set and Reset (124x)
 
 empty         0,0,0,0,0,0           // Empty module connecting input to output
 
@@ -153,14 +158,14 @@ EO32          6,6,2,0,24,328        // 3-Input XOR (1234x)
 EO33          6,6,2,0,24,328        // 3-Input XOR (1234x)
 EO34          6,6,2,0,24,346        // 3-Input XOR (1234x)
 
-FA1           4,-,-,0,28,364        // Full-Adder (1234x) // ??? Why FA1 is bigger then FA12?
-FA12          4,-,-,0,28,346        // Full-Adder (1234x)
-FA13          4,-,-,0,28,382        // Full-Adder (1234x)
-FA14          4,-,-,0,28,382        // Full-Adder (1234x)
-HA1           3,-,-,0,14,164        // Half-Adder (1234x)
-HA12          3,-,-,0,14,164        // Half-Adder (1234x)
-HA13          3,-,-,0,14,200        // Half-Adder (1234x)
-HA14          3,-,-,0,14,200        // Half-Adder (1234x)
+FA1           4, , ,0,28,364        // Full-Adder (1234x) // ??? Why FA1 is bigger then FA12?
+FA12          4, , ,0,28,346        // Full-Adder (1234x)
+FA13          4, , ,0,28,382        // Full-Adder (1234x)
+FA14          4, , ,0,28,382        // Full-Adder (1234x)
+HA1           3, , ,0,14,164        // Half-Adder (1234x)
+HA12          3, , ,0,14,164        // Half-Adder (1234x)
+HA13          3, , ,0,14,200        // Half-Adder (1234x)
+HA14          3, , ,0,14,200        // Half-Adder (1234x)
 
 // ??? Why so complecated? Why so different?
 IMU2          2,3,1,0,10,109        // 2:1 Inverting Multiplexer (124x)
@@ -190,29 +195,29 @@ INO22         2,4,2,0,10,109        // 2-Input NOR with one inverted input (1234
 INO23         4,4,2,0,10,164        // 2-Input NOR with one inverted input (1234x)
 INO24         4,4,2,0,10,164        // 2-Input NOR with one inverted input (1234x)
 
-IT1           2,-,-,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
-IT12          2,-,-,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
-IT13          2,-,-,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
-IT14          2,-,-,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
-IT1LP         2,-,-,0,12,73          // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
-IT2           2,-,-,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
-IT22          2,-,-,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
-IT23          2,-,-,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
-IT24          2,-,-,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
-IT2LP         2,-,-,0,12,73          // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT1           2, , ,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT12          2, , ,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT13          2, , ,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT14          2, , ,0,12,182         // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT1LP         2, , ,0,12,73          // Inverting Tristate Buffer with Active High Enable (1234{LP}x)
+IT2           2, , ,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT22          2, , ,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT23          2, , ,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT24          2, , ,0,12,182         // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
+IT2LP         2, , ,0,12,73          // Inverting Tristate Buffer with Active Low Enable (1234{LP}x)
 
-JK9           0,-,-,1,-,437         // JK Flip-Flop with Set (124x)
-JK92          0,-,-,1,-,437         // JK Flip-Flop with Set (124x)
-JK94          0,-,-,1,-,473         // JK Flip-Flop with Set (124x)
-JKA           0,-,-,1,-,473         // JK Flip-Flop with Reset (124x)
-JKA2          0,-,-,1,-,473         // JK Flip-Flop with Reset (124x)
-JKA4          0,-,-,1,-,510         // JK Flip-Flop with Reset (124x)
-JKS9          0,-,-,1,-,583         // Scan JK Flip-Flop with Set (124x)
-JKS92         0,-,-,1,-,583         // Scan JK Flip-Flop with Set (124x)
-JKS94         0,-,-,1,-,619         // Scan JK Flip-Flop with Set (124x)
-JKSA          0,-,-,1,-,619         // JK Flip-Flop with Reset (124x)
-JKSA2         0,-,-,1,-,619         // JK Flip-Flop with Reset (124x)
-JKSA4         0,-,-,1,-,655         // JK Flip-Flop with Reset (124x)
+JK9           0, , ,1, ,437         // JK Flip-Flop with Set (124x)
+JK92          0, , ,1, ,437         // JK Flip-Flop with Set (124x)
+JK94          0, , ,1, ,473         // JK Flip-Flop with Set (124x)
+JKA           0, , ,1, ,473         // JK Flip-Flop with Reset (124x)
+JKA2          0, , ,1, ,473         // JK Flip-Flop with Reset (124x)
+JKA4          0, , ,1, ,510         // JK Flip-Flop with Reset (124x)
+JKS9          0, , ,1, ,583         // Scan JK Flip-Flop with Set (124x)
+JKS92         0, , ,1, ,583         // Scan JK Flip-Flop with Set (124x)
+JKS94         0, , ,1, ,619         // Scan JK Flip-Flop with Set (124x)
+JKSA          0, , ,1, ,619         // JK Flip-Flop with Reset (124x)
+JKSA2         0, , ,1, ,619         // JK Flip-Flop with Reset (124x)
+JKSA4         0, , ,1, ,655         // JK Flip-Flop with Reset (124x)
 
 LOGIC0        1,0,0,0,0,36          // Tie-Down to Logic Low-Level  // ???
 LOGIC1        1,0,0,0,0,36          // Tie-Up to Logic High-Level // ???
