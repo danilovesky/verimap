@@ -285,7 +285,7 @@ bool verimap_process_params(int argc, char **argv)
       if (i != 0)
         Warning("<%s> must be the only flag",argv[i-1]);
       char* _verimap_help = verimap_get_help(_verimap_program_name);
-      fprintf(stderr, _verimap_help);
+      fprintf(stderr, "%s", _verimap_help);
       delete [] _verimap_help;
       result = false;
     }
@@ -297,7 +297,7 @@ bool verimap_process_params(int argc, char **argv)
       if (i != 0)
         Warning("\"%s\" must be the only flag",argv[i-1]);
       char* _verimap_version = verimap_get_version(_verimap_program_name);
-      fprintf(stderr, _verimap_version);
+      fprintf(stderr, "%s", _verimap_version);
       delete [] _verimap_version;
       result = false;
     }

@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -m32
+CFLAGS = -Wno-write-strings -Wno-deprecated
 LDFLAGS = -static -s
 LIBS =
 YACC = bison
