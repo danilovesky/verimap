@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
       Progress("Collecting statistics for original circuit");
       circuit->writeStatistics(_verimap_statistics_file_name);
     }
-    
+
     // output wires for original circuit
     if ((_verimap_wires_level & 1) == 1)
       circuit->writeWires(_verimap_wires_file_name, _verimap_wires_pattern);
@@ -286,14 +286,14 @@ int main(int argc, char* argv[])
     // write the resultunt circuit into the output file
     Progress("Writing output file");
     circuit->writeModules(_verimap_output_file_name);
-    
+
     // write full circuit output (required library DR modules and the circuit itself)
     if (_verimap_full_file_name)
     {
       Progress("Writing full output file");
       circuit->writeFullModules(_verimap_full_file_name);
     }
-    
+
     // clean up
     Progress("Cleaning up circuit object");
     delete circuit;

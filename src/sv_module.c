@@ -1219,12 +1219,15 @@ void Module::findSpacer(Instance* instance)
       {
         if (module_prot->testTag(TAG_MODULE_NDR) && module_prot->testTag(TAG_MODULE_PDR))
         {
-
           if ((instance->testTag(TAG_ITEM_0DR) && (2*in_sp0_num > in_num)) ||
               (instance->testTag(TAG_ITEM_1DR) && (2*in_sp1_num > in_num)))
           {
             instance->andTag(~TAG_MODULE_NDR);
             instance->orTag(TAG_MODULE_PDR);
+            char* instance_name = instance->genFullName();
+            Message("polarity change (NDR->PDR) for instance %s of module %s due to the majority of inputs with opposite spacer",
+              instance_name, instance->getModuleName());
+            delete [] instance_name;
           }
           else
           if ((instance->testTag(TAG_ITEM_1DR) && (2*in_sp0_num > in_num)) ||
@@ -1232,6 +1235,10 @@ void Module::findSpacer(Instance* instance)
           {
             instance->andTag(~TAG_MODULE_PDR);
             instance->orTag(TAG_MODULE_NDR);
+            char* instance_name = instance->genFullName();
+            Message("polarity change (PDR->NDR) for instance %s of module %s due to the majority of inputs with opposite spacer",
+              instance_name, instance->getModuleName());
+            delete [] instance_name;
           }
         }
       }
